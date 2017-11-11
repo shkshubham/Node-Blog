@@ -9,7 +9,7 @@ passport.serializeUser((user,done)=>{
 
 passport.deserializeUser((id,done)=>{
   User.findById(id).then((user)=>{
-    done(null,uesr)
+    done(null,user)
   });
 });
 
@@ -18,12 +18,10 @@ passport.use(new GoogleStrategy({
   clientID: keys.google.clientID,
   clientSecret: keys.google.clientSecret
 }, (accessToken, refreshToken, profile, done)=>{
-    console.log(profile);
     User.findOne({
       google_id: profile.id
     }).then((currentUser)=>{
       if(currentUser){
-        console.log("user found");
         done(null, currentUser)
       }
       else{
@@ -32,7 +30,6 @@ passport.use(new GoogleStrategy({
           google_id: profile.id,
           name: profile.displayName
         }).save().then((newUser)=>{
-          console.log(newUser);
           done(null, newUser)
         });
       }

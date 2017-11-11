@@ -1,5 +1,6 @@
 const express = require('express')
 const router = express.Router()
+const AuthCheck = require('../utils/authentication');
 
 // middleware that is specific to this router
 router.use(function timeLog (req, res, next) {
@@ -8,8 +9,15 @@ router.use(function timeLog (req, res, next) {
 })
 
 router.get('/', function (req, res) {
-  res.render('home')
+  res.render('home', {
+    user: req.user
+  })
 })
+
+router.get('/logout', (req, res)=>{
+  req.logout();
+  res.redirect("/");
+});
 
 router.get('/post', function (req, res) {
   res.send('post')
@@ -22,4 +30,10 @@ router.post('/post', function (req, res) {
     });
 })
 
-module.exports = router
+router.get("/profile", AuthCheck.auth,(req, res)=>{
+  console.log(req.user);
+  res.render('profile',{
+    user:req.user
+  });
+});
+module.exports = router;

@@ -1,5 +1,5 @@
 const express = require("express");
-const routes = require('./routes/api');
+const routes = require('./routes/web');
 const auth_routes = require('./routes/auth');
 const bodyParser = require("body-parser");
 const hbs = require('express-handlebars');
@@ -9,8 +9,15 @@ const app = express();
 const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
+const AuthCheck = require('./utils/authentication');
 
-app.engine('handlebars', hbs({defaultLayout: 'main'}));
+app.engine('handlebars', hbs({
+    defaultLayout: 'main',
+    partialsDir: [
+      'shared/templates/',
+      'views/partials/'
+    ]
+}));
 app.set('view engine', 'handlebars');
 
 app.use(cookieSession({
@@ -30,7 +37,7 @@ mongoose.connect(keys.mongodb.url, ()=>{
 
 app.use(bodyParser.json());
 app.use(routes);
-app.use('/auth',auth_routes)
+app.use('/auth',AuthCheck.notAuth, auth_routes)
 app.listen(process.env.port|| 4000, function(){
   console.log("server started");
 });

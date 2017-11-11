@@ -3,10 +3,24 @@
 <head>
     <meta charset="utf-8">
     <title>Blog</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <style>
+        #main-container{
+            min-height: 600px;
+            margin-top: 100px;
+          }
+    </style>
 </head>
 <body>
+  {{>navbar}}
+  <div id="main-container">
+    <div class="container">
+            {{{body}}}
+    </div>
+  </div>
 
-    {{{body}}}
+
+
 
 </body>
 </html>
