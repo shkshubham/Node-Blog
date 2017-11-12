@@ -1,39 +1,22 @@
 const express = require('express')
 const router = express.Router()
-const AuthCheck = require('../utils/authentication');
-
-// middleware that is specific to this router
-router.use(function timeLog (req, res, next) {
-  console.log('Time: ', Date.now())
-  next()
-})
-
-router.get('/', function (req, res) {
-  res.render('home', {
-    user: req.user
-  })
-})
+const AuthCheck = require('../middlewares/authentication');
+const PostController = require('../controllers/PostController');
+const ProfileController = require('../controllers/ProfileController');
+const PagesController = require('../controllers/PagesController');
 
 router.get('/logout', (req, res)=>{
   req.logout();
   res.redirect("/");
 });
 
-router.get('/post', function (req, res) {
-  res.send('post')
-})
-router.post('/post', function (req, res) {
-  console.log(req.body);
-  res.send({
-      type: 'POST',
-      name: req.body.name
-    });
-})
+//posts controllerc
+router.get('/', PostController.index);
+router.get('/post/create',AuthCheck.auth ,PostController.create);
+router.post('/post/store', PostController.store);
+router.get('/post/:slug', PostController.show);
 
-router.get("/profile", AuthCheck.auth,(req, res)=>{
-  console.log(req.user);
-  res.render('profile',{
-    user:req.user
-  });
-});
+router.post('/q', PagesController.search);
+
+router.get("/profile", AuthCheck.auth,ProfileController.index);
 module.exports = router;

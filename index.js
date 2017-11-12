@@ -2,42 +2,62 @@ const express = require("express");
 const routes = require('./routes/web');
 const auth_routes = require('./routes/auth');
 const bodyParser = require("body-parser");
-const hbs = require('express-handlebars');
+const exphbs = require('express-handlebars');
 const passportConfig = require('./config/passport');
 const mongoose = require('mongoose');
 const app = express();
 const keys = require('./config/keys');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
-const AuthCheck = require('./utils/authentication');
+const AuthCheck = require('./middlewares/authentication');
+const helpers = require('./utils/helpers');
 
-app.engine('handlebars', hbs({
-    defaultLayout: 'main',
-    partialsDir: [
-      'shared/templates/',
-      'views/partials/'
-    ]
-}));
+
+//-------------------------handlebars---------------------------
+var hbs = exphbs.create({
+  defaultLayout: 'main',
+  partialsDir: [
+    'shared/templates/',
+    'views/partials/'
+  ],
+  helpers: {
+      slice: helpers.slice,
+      bar: function () {
+      return 'BAR!';
+    }
+  }
+});
+
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+
+//-------------------------xx-------------------------------
 
 app.use(cookieSession({
     maxAge: 24*60*60**1000,
     keys: [keys.session.cookieKey]
 }));
 
-//initialize passport
+//-----------------------initialize passport-------------------
 app.use(passport.initialize());
 app.use(passport.session());
 
+//--------------------------xx-------------------------------
 
 //connect to mongodb
 mongoose.connect(keys.mongodb.url, ()=>{
   console.log("connected to db");
 });
 
+//--------------------------bodyParser---------------------------
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+//--------------------------rooutes------------------------------
 app.use(routes);
 app.use('/auth',AuthCheck.notAuth, auth_routes)
+
+//---------------------------server-------------------------------
 app.listen(process.env.port|| 4000, function(){
   console.log("server started");
 });

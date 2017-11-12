@@ -18,6 +18,7 @@ passport.use(new GoogleStrategy({
   clientID: keys.google.clientID,
   clientSecret: keys.google.clientSecret
 }, (accessToken, refreshToken, profile, done)=>{
+  console.log(profile);
     User.findOne({
       google_id: profile.id
     }).then((currentUser)=>{
@@ -26,9 +27,11 @@ passport.use(new GoogleStrategy({
       }
       else{
         new User({
-          username: profile.nickname,
-          google_id: profile.id,
-          name: profile.displayName
+          username: profile._json.nickname,
+          google_id: profile._json.id,
+          name: profile._json.displayName,
+          avatar: profile._json.image.url,
+
         }).save().then((newUser)=>{
           done(null, newUser)
         });
