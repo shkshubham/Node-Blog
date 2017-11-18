@@ -22,7 +22,13 @@ router.get('/github/callback', passport.authenticate("github"), (req,res)=>{
 });
 
 router.get('/stack/callback',(req,res)=>{
-  return res.send(req.body);
+  req.login(req.body.account_id, function (err, data) {
+                if ( ! err ){
+                    res.redirect('/account');
+                } else {
+                    console.log(data)
+                }
+            })
 });
 
 module.exports = router;
