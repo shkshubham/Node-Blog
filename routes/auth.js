@@ -22,11 +22,11 @@ router.get('/github/callback', passport.authenticate("github"), (req,res)=>{
 });
 
 router.get('/stack', (req,res)=>{
- console.log(req.body);
+ 
 });
 
-router.post('/stack', (req,res)=>{
-  return res;
+router.post('/stack/callback', (req,res)=>{
+  return res.send(req.body);
 });
 
 
