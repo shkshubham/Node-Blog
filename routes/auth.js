@@ -22,6 +22,18 @@ router.get('/github/callback', passport.authenticate("github"), (req,res)=>{
 });
 
 router.get('/stack/callback',(req,res)=>{
+  req.session.passport.user = {
+    id: req.body.account_id
+  }
+  passport.serializeUser((user,done)=>{
+    done(null, user)
+  });
+
+  passport.deserializeUser((id,done)=>{
+    User.findById(id).then((user)=>{
+      done(null,user)
+    });
+  });
   req.login(req.body.account_id, function (err, data) {
                 if ( ! err ){
                     res.redirect('/account');
