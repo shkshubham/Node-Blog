@@ -72,7 +72,7 @@ passport.use(new GitHubStrategy({
 ));
 
 
-passport.use(new GitHubStrategy({
+passport.use(new StackStrategy({
     clientID: keys.stack.clientID,
     clientSecret: keys.stack.clientSecret,
     callbackURL: "/auth/stack/callback"
