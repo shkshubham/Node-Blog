@@ -21,14 +21,17 @@ router.get('/github/callback', passport.authenticate("github"), (req,res)=>{
   res.redirect('/profile');
 });
 
-router.post('/stack/store',(req,res)=>{
-  res.send(req.body);
-  //res.redirect('/profile');
+router.get('/stack', passport.authenticate("stack-oauth2"), (req,res)=>{
+ scope: [ 'private_info' ];
 });
 
-router.get('/stack/callback',(req,res)=>{
-  return res.send(req.body);
+router.get('/stack/callback', passport.authenticate("stack-oauth2"), (req,res)=>{
+ scope: [ 'user:email' ];
 });
+
+//router.get('/stack/callback',(req,res)=>{
+//  return res.send(req.body);
+//});
 
 
 

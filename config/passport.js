@@ -1,7 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 const GitHubStrategy = require('passport-github2').Strategy;
-const LocalStrategy = require('passport-local').Strategy;
+const Oauth2Strategy = require('passport-oauth2').Strategy;
 const keys = require('./keys');
 const User = require('../models/User');
 
@@ -73,10 +73,14 @@ passport.use(new GitHubStrategy({
 
 
 
-passport.use(new LocalStrategy(function(username, password, done) {
-
-  process.nextTick(function() {
-    // Auth Check Logic
-    console.log(username);
-  });
-}));
+passport.use('stack-oauth2',new Oauth2Strategy({
+    authorizationURL: 'https://stackexchange.com/oauth',
+    tokenURL: 'https://stackexchange.com/oauth/access_token',
+    clientID: 11276,
+    clientSecret: "tWJ6z6HAr90QaUGYwfSRng((",
+    callbackURL: "http://pacific-crag-58243.herokuapp.com/auth/stack/callback"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+    console.log(profile);
+  }
+));
