@@ -21,9 +21,9 @@ router.get('/github/callback', passport.authenticate("github"), (req,res)=>{
   res.redirect('/profile');
 });
 
-router.get('/stack/store',passport.authenticate('local'),(req,res)=>{
-  console.log(req.body);
-  res.redirect('/profile');
+router.post('/stack/store',(req,res)=>{
+  res.send(req.body);
+  //res.redirect('/profile');
 });
 
 router.get('/stack/callback',(req,res)=>{

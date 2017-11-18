@@ -1,7 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 const GitHubStrategy = require('passport-github2').Strategy;
-var LocalStrategy = require('passport-local').Strategy;
+const LocalStrategy = require('passport-local').Strategy;
 const keys = require('./keys');
 const User = require('../models/User');
 
@@ -72,8 +72,11 @@ passport.use(new GitHubStrategy({
 ));
 
 
-passport.use(new LocalStrategy(
-  function(name, done) {
-    console.log(name);
-  }
-));
+
+passport.use(new LocalStrategy(function(username, password, done) {
+
+  process.nextTick(function() {
+    // Auth Check Logic
+    console.log(username);
+  });
+}));
