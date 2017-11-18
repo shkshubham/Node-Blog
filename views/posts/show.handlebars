@@ -3,7 +3,48 @@
   <hr>
   <p>Posted By: <span>{{ user_name }}</span></p>
   <hr>
-  <p>{{ post.body }}</p>
-  <p>Posted On: {{ post.created_at }}</p>
+  <img  class="img-thumbnail"  src="/public/{{post.image}}" alt="image">
+  <p>{{{ post.body }}}</p>
+  <p>Posted On: <small>{{ datetime post.created_at }}</small></p>
+<hr>
+
+<label for="">Comment:</label>
+  <div class="comments">
+		<div class="comment-wrap">
+				<div class="photo">
+						<div class="avatar" style="background-image: url('{{user.avatar}}')"></div>
+				</div>
+				<div class="comment-block">
+						<form id="frm_details" name="frm_details" class="form"  method="post">
+                <input type="hidden" id="post_slug" name="post_slug" value="{{post.slug}}">
+								<textarea name="comment" id="" cols="30" rows="3" placeholder="Add comment..."></textarea>
+                <button class="btn btn-primary" type="submit" id="">Comment</button>
+            </form>
+				</div>
+		</div>
+
+    <div id="comments-list">
+      {{#each post.comments}}
+      <div class="comment-wrap">
+    				<div class="photo">
+    						<div class="avatar" style="background-image: url('{{this.user.avatar}}')"></div>
+    				</div>
+    				<div class="comment-block">
+    						<p class="comment-text">{{this.text}}</p>
+    						<div class="bottom-comment">
+    								<div class="comment-date">{{datetime this.commented_at}}</div>
+                <!--    {{#ifvalue this.user.id equal=user.id}}
+                    <ul class="comment-actions">
+    										<li class="complain">Delete</li>
+                        <li class="edit">Edit</li>
+    								</ul>
+                     {{/ifvalue}}
+                   -->
+    						</div>
+    				</div>
+    		</div>
+        {{/each}}
+    </div>
+</div>
 
 </div>

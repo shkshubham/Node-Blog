@@ -13,6 +13,7 @@ const AuthCheck = require('./middlewares/authentication');
 const helpers = require('./utils/helpers');
 
 
+
 //-------------------------handlebars---------------------------
 var hbs = exphbs.create({
   defaultLayout: 'main',
@@ -22,11 +23,14 @@ var hbs = exphbs.create({
   ],
   helpers: {
       slice: helpers.slice,
+      ifvalue: helpers.ifvalue,
+      datetime: helpers.datetime,
       bar: function () {
       return 'BAR!';
     }
   }
 });
+
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
@@ -56,6 +60,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //--------------------------rooutes------------------------------
 app.use(routes);
 app.use('/auth',AuthCheck.notAuth, auth_routes)
+app.use('/public', express.static('public'));
 
 //---------------------------server-------------------------------
 app.listen(process.env.port|| 4000, function(){

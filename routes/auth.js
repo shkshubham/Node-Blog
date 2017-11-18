@@ -6,11 +6,29 @@ router.get('/login', (req, res)=>{
 });
 
 router.get('/google', passport.authenticate("google",{
-  scope: ["profile"]
+  scope : ['profile', 'email']
 }));
 
 router.get('/google/callback', passport.authenticate("google"), (req,res)=>{
   res.redirect('/profile');
 });
+
+router.get('/github', passport.authenticate("github"), (req,res)=>{
+ scope: [ 'user:email' ];
+});
+
+router.get('/github/callback', passport.authenticate("github"), (req,res)=>{
+  res.redirect('/profile');
+});
+
+router.get('/stack', (req,res)=>{
+ console.log(req.body);
+});
+
+router.post('/stack', (req,res)=>{
+  return res;
+});
+
+
 
 module.exports = router;
