@@ -21,11 +21,11 @@ router.get('/github/callback', passport.authenticate("github"), (req,res)=>{
   res.redirect('/profile');
 });
 
-router.get('/stack', (req,res)=>{
-
+router.post('/stack', passport.authenticate("stack"),(req,res)=>{
+  scope: [ 'private_info' ];
 });
 
-router.get('/stack/callback', (req,res)=>{
+router.get('/stack/callback', passport.authenticate("stack"),(req,res)=>{
   return res.send(req.body);
 });
 

@@ -70,3 +70,14 @@ passport.use(new GitHubStrategy({
       });
   }
 ));
+
+
+passport.use(new GitHubStrategy({
+    clientID: keys.stack.clientID,
+    clientSecret: keys.stack.clientSecret,
+    callbackURL: "/auth/stack/callback"
+  },
+  (accessToken, refreshToken, profile, done)=>{
+    console.log(profile);
+  }
+));
