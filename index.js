@@ -67,7 +67,6 @@ app.use('/public', express.static('public'));
 
 
 const server_port = process.env.PORT || 4000;
-const server_host = process.env.HOST || '127.0.0.1' || '122.172.171.164';
-app.listen(server_port, server_host, function(){
+app.listen(server_port, function(){
   console.log("server started");
 });
