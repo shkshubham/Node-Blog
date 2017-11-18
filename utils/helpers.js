@@ -1,11 +1,11 @@
 var moment = require('moment');
 
 var Bodyslice = function(value) {
-  return value.slice(0,10) + '...';
+  return value.slice(0,50) + '...';
 };
 
 var Titleslice = function(value) {
-  return value.slice(0,50) + '...';
+  return value.slice(0,32) + '...';
 };
 
 var ifvalue = function(conditional, options) {
