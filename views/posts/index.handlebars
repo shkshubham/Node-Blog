@@ -2,10 +2,10 @@
 <div class="post-card" style="margin-top:20px;">
   <div class="col-md-4">
     <div class="card" style="width: 20rem;">
-      <img class="card-img-top"  src="/public/{{this.image}}" alt="Card image cap">
+      <img class="card-image img" src="/public/{{this.image}}" alt="Card image cap">
       <div class="card-body">
-        <h4 class="card-title">{{this.title}}</h4>
-        <p class="card-text">{{slice this.body}}</p>
+        <h4 class="card-title">{{Titleslice this.title}}</h4>
+        <p class="card-text">{{Bodyslice this.body}}</p>
         <a href="/post/{{this.slug}}" class="btn btn-primary">Read More</a>
       </div>
     </div>

@@ -1,9 +1,12 @@
 var moment = require('moment');
 
-var slice = function(value) {
-  return value.slice(0,50) + '...';
+var Bodyslice = function(value) {
+  return value.slice(0,10) + '...';
 };
 
+var Titleslice = function(value) {
+  return value.slice(0,50) + '...';
+};
 
 var ifvalue = function(conditional, options) {
     if (conditional == options.hash.equals) {
@@ -20,7 +23,8 @@ var datetime = function(date) {
 };
 
 module.exports = {
-  slice,
+  Bodyslice,
+  Titleslice,
   ifvalue,
   datetime
 };

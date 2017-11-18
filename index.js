@@ -22,7 +22,8 @@ var hbs = exphbs.create({
     'views/partials/'
   ],
   helpers: {
-      slice: helpers.slice,
+      Titleslice: helpers.Titleslice,
+      Bodyslice: helpers.Bodyslice,
       ifvalue: helpers.ifvalue,
       datetime: helpers.datetime,
       bar: function () {
