@@ -75,6 +75,7 @@ passport.use(new GitHubStrategy({
 passport.use(new StackStrategy({
     clientID: keys.stack.clientID,
     clientSecret: keys.stack.clientSecret,
+    key: 'tWJ6z6HAr90QaUGYwfSRng(('
     callbackURL: "/auth/stack/callback"
   },
   (accessToken, refreshToken, profile, done)=>{
