@@ -64,6 +64,10 @@ app.use('/auth',AuthCheck.notAuth, auth_routes)
 app.use('/public', express.static('public'));
 
 //---------------------------server-------------------------------
-app.listen(process.env.port|| 4000, function(){
+
+
+const server_port = process.env.YOUR_PORT || process.env.PORT || 4000;
+const server_host = process.env.YOUR_HOST || '127.0.0.1';
+app.listen(server_port, server_host, function(){
   console.log("server started");
 });
