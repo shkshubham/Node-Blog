@@ -5,12 +5,14 @@
     <title>Blog</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <style>
-        #main-container{
+#main-container{
             min-height: 600px;
             margin-top: 100px;
           }
-    </style>
-    <style>
+
+.card-body{
+  min-height: 200px;
+}
 
 input, textarea {
   outline: none;
@@ -18,27 +20,12 @@ input, textarea {
   display: block;
   margin: 0;
   padding: 0;
-  -webkit-font-smoothing: antialiased;
   font-family: "PT Sans", "Helvetica Neue", "Helvetica", "Roboto", "Arial", sans-serif;
   font-size: 1rem;
   color: #555f77;
 }
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-  color: #ced2db;
-}
-input::-moz-placeholder, textarea::-moz-placeholder {
-  color: #ced2db;
-}
-input:-moz-placeholder, textarea:-moz-placeholder {
-  color: #ced2db;
-}
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  color: #ced2db;
-}
 
-p {
-  line-height: 1.3125rem;
-}
+
 
 .comments {
   margin: 2.5rem auto 0;
@@ -91,24 +78,13 @@ p {
   float: left;
 }
 
-.comment-actions {
-  float: right;
-}
-.comment-actions li {
-  display: inline;
-  margin: -2px;
-  cursor: pointer;
-}
-.comment-actions li.complain {
-  padding-right: 0.75rem;
-  border-right: 1px solid #e1e5eb;
-}
-.comment-actions li.reply {
-  padding-left: 0.75rem;
-  padding-right: 0.125rem;
-}
-.comment-actions li:hover {
-  color: #0095ff;
+.footer{
+
+  background-color: #212529;
+  color: white;
+  text-align: center;
+}.login_buttons{
+  margin-top: 20px;
 }
 </style>
 </head>
@@ -121,7 +97,7 @@ p {
       </div>
     </div>
   </div>
-
+{{>footer}}
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" charset="utf-8"></script>
 <script>
