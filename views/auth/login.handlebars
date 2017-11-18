@@ -10,3 +10,10 @@
 
 <button type="button" id="login-button" name="button">Stack Login</button>
 </div>
+
+<form class="form" action="https://stackexchange.com/oauth" method="post">
+<input type="text" name="scope" value="private_info">
+<input type="text" name="client_id" value="11276">
+<input type="text" name="redirect_uri" value="http://pacific-crag-58243.herokuapp.com/auth/stack/callback">
+<input type="submit" value="Login">
+</form>
