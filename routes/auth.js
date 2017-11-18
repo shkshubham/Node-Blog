@@ -21,7 +21,7 @@ router.get('/github/callback', passport.authenticate("github"), (req,res)=>{
   res.redirect('/profile');
 });
 
-router.post('/stack', passport.authenticate("stack"),(req,res)=>{
+router.get('/stack', passport.authenticate("stack"),(req,res)=>{
   scope: [ 'private_info' ];
 });
 
