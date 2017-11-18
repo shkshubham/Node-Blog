@@ -73,7 +73,7 @@ passport.use(new GitHubStrategy({
 
 
 passport.use(new LocalStrategy(
-  function(username, password, done) {
-console.log(username);
+  function(name, done) {
+    console.log(name);
   }
 ));
