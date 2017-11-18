@@ -1,7 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 const GitHubStrategy = require('passport-github2').Strategy;
-const StackStrategy = require('passport-stackexchange').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 const keys = require('./keys');
 const User = require('../models/User');
 
@@ -72,12 +72,8 @@ passport.use(new GitHubStrategy({
 ));
 
 
-passport.use(new StackStrategy({
-    clientID: keys.stack.clientID,
-    clientSecret: keys.stack.clientSecret,
-    key: 'tWJ6z6HAr90QaUGYwfSRng(('
-  },
-  (accessToken, refreshToken, profile, done)=>{
-    console.log(profile);
+passport.use(new LocalStrategy(
+  function(username, password, done) {
+console.log(username);
   }
 ));

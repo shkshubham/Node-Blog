@@ -22,6 +22,8 @@
     "passport": "^0.4.0",
     "passport-github2": "^0.1.11",
     "passport-google-oauth20": "^1.0.0",
+    "passport-local": "^1.0.0",
+    "passport-oauth": "^1.0.0",
     "passport-stackexchange": "^0.1.2",
     "path": "^0.12.7",
     "slugify": "^1.2.2"
