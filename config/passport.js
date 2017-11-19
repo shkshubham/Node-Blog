@@ -92,15 +92,14 @@ passport.use(new StackExchangeStrategy({
               new User({
                 username: profile.account_id,
                 stackexchange_id: profile.account_id,
-                name: profile._json.display_name,
-                avatar: profile._json.profile_image,
+                name: profile.display_name,
+                avatar: profile.profile_image,
 
               }).save().then((newUser)=>{
                 done(null, newUser)
               });
-            }
+            };
           });
-            console.log(profile);
         });
     }
 ));

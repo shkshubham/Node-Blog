@@ -12,7 +12,7 @@ const cookieSession = require('cookie-session');
 const passport = require('passport');
 const AuthCheck = require('./middlewares/authentication');
 const helpers = require('./utils/helpers');
-
+mongoose.Promise = global.Promise;
 
 
 //-------------------------handlebars---------------------------

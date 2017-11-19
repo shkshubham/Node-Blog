@@ -15,6 +15,10 @@ const UserSchema = new Schema({
       type:String,
       default: null
       },
+  stackexchange_id:{
+          type:String,
+          default: null
+          },
 });
 const User = mongoose.model("user",UserSchema);
 
