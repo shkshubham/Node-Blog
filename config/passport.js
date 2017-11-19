@@ -82,12 +82,25 @@ passport.use(new StackExchangeStrategy({
         // asynchronous verification, for effect...
         process.nextTick(function () {
 
-            // To keep the example simple, the user's Facebook profile is returned to
-            // represent the logged-in user.  In a typical application, you would want
-            // to associate the Facebook account with a user record in your database,
-            // and return that user instead.
+          User.findOne({
+            stackexchange_id: profile.account_id:
+          }).then((currentUser)=>{
+            if(currentUser){
+              done(null, currentUser)
+            }
+            else{
+              new User({
+                username: profile.account_id,
+                stackexchange_id: profile.account_id,
+                name: profile._json.display_name,
+                avatar: profile._json.profile_image,
+
+              }).save().then((newUser)=>{
+                done(null, newUser)
+              });
+            }
+          });
             console.log(profile);
-            return done(null, profile);
         });
     }
 ));
