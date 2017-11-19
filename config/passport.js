@@ -83,7 +83,7 @@ passport.use(new StackExchangeStrategy({
         process.nextTick(function () {
 
           User.findOne({
-            stackexchange_id: profile.account_id:
+            stackexchange_id: profile.account_id
           }).then((currentUser)=>{
             if(currentUser){
               done(null, currentUser)
