@@ -21,26 +21,34 @@ router.get('/github/callback', passport.authenticate("github"), (req,res)=>{
   res.redirect('/profile');
 });
 
+/*
 router.get('/stack/callback',(req,res)=>{
-  req.session.passport.user = {
-    id: req.body.account_id
-  }
-  passport.serializeUser((user,done)=>{
-    done(null, user)
+  passport.serializeUser((user_id,done)=>{
+    done(null, user_id)
   });
 
-  passport.deserializeUser((id,done)=>{
-    User.findById(id).then((user)=>{
-      done(null,user)
-    });
+  passport.deserializeUser((user_id,done)=>{
+      done(null,user_id)
   });
-  req.login(req.body.account_id, function (err, data) {
-                if ( ! err ){
-                    res.redirect('/account');
-                } else {
-                    console.log(data)
-                }
-            })
+  var user = {
+    user_id: 1234
+  };
+  console.log(user)
+  req.login(user, function(err){
+    console.log(err)
+  })
 });
+
+*/
+
+router.get('/stack-exchange',passport.authenticate('stackexchange'));
+
+router.get('/stack-exchange/callback',
+    passport.authenticate('stackexchange', { failureRedirect: '/login' }),
+    function(req, res) {
+      console.log(req.body);
+        res.redirect('/');
+    });
+
 
 module.exports = router;

@@ -9,7 +9,8 @@ const google = {
 
 const stack = {
   clientID: "11276",
-  clientSecret: "tWJ6z6HAr90QaUGYwfSRng(("
+  clientSecret: "3OcdczzGWALcuyNglP4Yrg((",
+  key: 'tWJ6z6HAr90QaUGYwfSRng(('
 };
 
 const github = {

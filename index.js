@@ -1,4 +1,5 @@
 const express = require("express");
+const session = require("express-session");
 const routes = require('./routes/web');
 const auth_routes = require('./routes/auth');
 const bodyParser = require("body-parser");
@@ -44,6 +45,13 @@ app.use(cookieSession({
 }));
 
 //-----------------------initialize passport-------------------
+app.use(session({
+  secret: keys.session.cookieKey,
+  resave: false,
+  saveUninitialized: true,
+  //cookie: { secure: true }
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 

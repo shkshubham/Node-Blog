@@ -1,6 +1,7 @@
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20');
 const GitHubStrategy = require('passport-github2').Strategy;
+const StackExchangeStrategy = require('passport-stackexchange').Strategy;
 const keys = require('./keys');
 const User = require('../models/User');
 
@@ -68,4 +69,25 @@ passport.use(new GitHubStrategy({
         }
       });
   }
+));
+
+passport.use(new StackExchangeStrategy({
+        clientID: keys.stack.clientID,
+        clientSecret: keys.stack.clientSecret,
+        callbackURL: 'http://pacific-crag-58243.herokuapp.com/auth/stack/callback',
+        key: keys.stack.key,
+        site: 'stackoverflow'
+    },
+    function(accessToken, refreshToken, profile, done) {
+        // asynchronous verification, for effect...
+        process.nextTick(function () {
+
+            // To keep the example simple, the user's Facebook profile is returned to
+            // represent the logged-in user.  In a typical application, you would want
+            // to associate the Facebook account with a user record in your database,
+            // and return that user instead.
+            console.log(profile);
+            return done(null, profile);
+        });
+    }
 ));
