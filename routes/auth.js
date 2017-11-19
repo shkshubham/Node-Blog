@@ -41,9 +41,9 @@ router.get('/stack/callback',(req,res)=>{
 
 */
 
-router.get('/stack-exchange',passport.authenticate('stackexchange'));
+router.get('/stack',passport.authenticate('stackexchange'));
 
-router.get('/stack-exchange/callback',
+router.get('/stack/callback',
     passport.authenticate('stackexchange', { failureRedirect: '/login' }),
     function(req, res) {
       console.log(req.body);
